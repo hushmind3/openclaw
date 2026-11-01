@@ -48,10 +48,10 @@
         },
         "workspace": "/Users/gim-yeonsu/.openclaw/workspace",
         "thinkingDefault": "medium",
-        "name": "메인"
+        "name": "🧭 메인"
       },
       "ainz": {
-        "name": "아인즈",
+        "name": "💀 아인즈",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/ainz",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -67,7 +67,7 @@
         }
       },
       "albedo": {
-        "name": "알베도",
+        "name": "🛡️ 알베도",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/albedo",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -83,7 +83,7 @@
         }
       },
       "aura": {
-        "name": "아우라",
+        "name": "🏹 아우라",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/aura",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -99,7 +99,7 @@
         }
       },
       "cocytus": {
-        "name": "코퀴토스",
+        "name": "❄️ 코퀴토스",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/cocytus",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -115,7 +115,7 @@
         }
       },
       "demiurge": {
-        "name": "데미우르고스",
+        "name": "😈 데미우르고스",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/demiurge",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -131,7 +131,7 @@
         }
       },
       "mare": {
-        "name": "마레",
+        "name": "🌿 마레",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/mare",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -147,7 +147,7 @@
         }
       },
       "pandora-actor": {
-        "name": "판도라",
+        "name": "🎭 판도라",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/pandora-actor",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -163,7 +163,7 @@
         }
       },
       "sebas": {
-        "name": "세바스",
+        "name": "🕴️ 세바스",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/sebas",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
@@ -179,7 +179,7 @@
         }
       },
       "shalltear": {
-        "name": "샤르티아",
+        "name": "🦇 샤르티아",
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/shalltear",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
