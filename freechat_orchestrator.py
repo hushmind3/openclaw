@@ -60,11 +60,7 @@ def reply(agent: str, context: list[dict]) -> str:
         if text:
             lines.append(f"{who}: {text[:300]}")
     transcript = "\n".join(lines) or "(대화 시작)"
-    prompt = (
-        f"너는 나자릭의 {NAMES[agent]}이다. 다음은 '나자릭 자유대화' 채널의 최근 대화다.\n\n"
-        f"{transcript}\n\n"
-        "네 성격과 말투로 자연스럽게 이어서 1~2문장만 말하라. 발언만 출력하라."
-    )
+    prompt = transcript or "…"
     out = subprocess.run(
         ["openclaw", "agent", "--agent", agent, "--message", prompt],
         capture_output=True, text=True, timeout=120,
