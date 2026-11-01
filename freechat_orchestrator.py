@@ -115,15 +115,29 @@ def reply(agent: str, context: list[dict]) -> str:
     return text[:1800]
 
 
-def run(turns: int) -> None:
+def do_reset(toks: dict[str, str]) -> int:
+    n = bump_generation()
+    api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
+        {"content": f"새 주제로 시작합니다. (세션 {n})"})
+    mark_since()
+    print(f"reset -> generation {n}", flush=True)
+    return n
+
+
+def run(turns: int, cancel: threading.Event | None = None) -> None:
     toks = tokens()
     since = reset_since()
+    cancel = cancel or threading.Event()
     log = open(LOG, "a", encoding="utf-8")
     for i in range(turns):
+        if cancel.is_set():
+            log.write(f"{time.strftime('%H:%M:%S')} cancelled\n")
+            log.flush()
+            break
         agent = AGENTS[i % len(AGENTS)]
         try:
-            stop = threading.Event()
-            def keep_typing(tok=toks[agent], ev=stop):
+            typing_stop = threading.Event()
+            def keep_typing(tok=toks[agent], ev=typing_stop):
                 while not ev.is_set():
                     try:
                         api(tok, f"/channels/{CHANNEL}/typing", "POST")
@@ -135,7 +149,11 @@ def run(turns: int) -> None:
             if since:
                 ctx = [m for m in ctx if m["timestamp"] > since]
             text = reply(agent, ctx)
-            stop.set()
+            typing_stop.set()
+            if cancel.is_set():
+                log.write(f"{time.strftime('%H:%M:%S')} {agent} cancelled after generation\n")
+                log.flush()
+                break
             api(toks[agent], f"/channels/{CHANNEL}/messages", "POST",
                 {"content": text})
             log.write(f"{time.strftime('%H:%M:%S')} {agent}: {text[:80]}\n")
@@ -152,6 +170,8 @@ def run(turns: int) -> None:
 def watch() -> None:
     toks = tokens()
     seen = {m["id"] for m in recent(toks["ainz"], 20)}
+    stop = threading.Event()
+    worker = None
     print("watching for a user message...", flush=True)
     while True:
         try:
@@ -160,16 +180,18 @@ def watch() -> None:
             seen.update(m["id"] for m in msgs)
             users = [m for m in fresh
                      if not m["author"].get("bot") and (m.get("content") or "").strip()]
-            if users:
-                last = users[-1]
-                if is_reset(last["content"]):
-                    n = bump_generation()
-                    api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
-                        {"content": f"새 주제로 시작합니다. (세션 {n})"})
-                    mark_since()
-                    print(f"reset -> generation {n}", flush=True)
-                else:
-                    run(9)
+            for m in users:
+                if is_reset(m["content"]):
+                    if worker and worker.is_alive():
+                        stop.set()
+                        print("reset: cancelled running chain", flush=True)
+                    do_reset(toks)
+                    stop = threading.Event()
+                    worker = None
+                elif worker is None or not worker.is_alive():
+                    stop = threading.Event()
+                    worker = threading.Thread(target=run, args=(9, stop), daemon=True)
+                    worker.start()
         except Exception as exc:  # noqa: BLE001 - keep watching
             print("watch error:", exc, flush=True)
         time.sleep(3)

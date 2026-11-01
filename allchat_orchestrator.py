@@ -122,15 +122,22 @@ def reply(agent: str, transcript: str) -> str:
     return text[:1800]
 
 
+def do_reset(toks: dict[str, str]) -> int:
+    n = bump_generation()
+    api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
+        {"content": f"새 주제로 시작합니다. (세션 {n})"})
+    mark_since()
+    print(f"reset -> generation {n}", flush=True)
+    return n
+
+
 def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
-        trigger_id: str | None = None) -> None:
+        trigger_id: str | None = None,
+        cancel: threading.Event | None = None) -> None:
     if is_reset(trigger):
-        n = bump_generation()
-        api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
-            {"content": f"새 주제로 시작합니다. (세션 {n})"})
-        mark_since()
-        print(f"reset -> generation {n}", flush=True)
+        do_reset(toks)
         return
+    cancel = cancel or threading.Event()
     selected = select(trigger, ids)
     # 리셋 이후 대화만 읽는다. 세대가 바뀌면 예전 채널 기록은 제외된다.
     since = reset_since()
@@ -151,8 +158,12 @@ def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
     log.write(f"{time.strftime('%H:%M:%S')} trigger={trigger[:40]!r} selected={selected}\n")
     current = transcript
     for agent in selected:
-        stop = threading.Event()
-        def keep_typing(tok=toks[agent], ev=stop):
+        if cancel.is_set():
+            log.write("  cancelled before next turn\n")
+            log.flush()
+            break
+        typing_stop = threading.Event()
+        def keep_typing(tok=toks[agent], ev=typing_stop):
             while not ev.is_set():
                 try:
                     api(tok, f"/channels/{CHANNEL}/typing", "POST")
@@ -162,14 +173,18 @@ def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
         threading.Thread(target=keep_typing, daemon=True).start()
         try:
             text = reply(agent, current)
-            stop.set()
+            typing_stop.set()
+            if cancel.is_set():
+                log.write(f"  {agent} cancelled after generation\n")
+                log.flush()
+                break
             api(toks[agent], f"/channels/{CHANNEL}/messages", "POST", {"content": text})
             current += f"\n{DISPLAY[agent]}: {text}"
             log.write(f"  {agent}: {text[:60]}\n")
             log.flush()
             print(f"{DISPLAY[agent]}: {text[:50]}", flush=True)
         except Exception as exc:  # noqa: BLE001 - one turn may fail
-            stop.set()
+            typing_stop.set()
             log.write(f"  {agent} ERROR: {exc}\n")
             log.flush()
             print(f"{DISPLAY[agent]} ERROR: {exc}", flush=True)
@@ -186,6 +201,8 @@ def watch() -> None:
         except Exception:  # noqa: BLE001
             pass
     seen = {m["id"] for m in recent(toks["ainz"], 20)}
+    stop = threading.Event()
+    worker = None
     print("allchat watching...", flush=True)
     while True:
         try:
@@ -193,9 +210,22 @@ def watch() -> None:
             fresh = [m for m in msgs if m["id"] not in seen]
             seen.update(m["id"] for m in msgs)
             users = [m for m in fresh if not m["author"].get("bot") and (m.get("content") or "").strip()]
-            if users:
-                last = users[-1]
-                run(last["content"], toks, ids, trigger_id=last["id"])
+            for m in users:
+                if is_reset(m["content"]):
+                    if worker and worker.is_alive():
+                        stop.set()
+                        print("reset: cancelled running chain", flush=True)
+                    do_reset(toks)
+                    stop = threading.Event()
+                    worker = None
+                elif worker is None or not worker.is_alive():
+                    stop = threading.Event()
+                    worker = threading.Thread(
+                        target=run,
+                        args=(m["content"], toks, ids, m["id"], stop),
+                        daemon=True,
+                    )
+                    worker.start()
         except Exception as exc:  # noqa: BLE001 - keep watching
             print("watch error:", exc, flush=True)
         time.sleep(3)
