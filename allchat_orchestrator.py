@@ -83,12 +83,17 @@ def reply(agent: str, transcript: str) -> str:
 def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
         trigger_id: str | None = None) -> None:
     selected = select(trigger, ids)
-    ctx = recent(toks["ainz"], 6)
+    # 그 시점까지의 대화를 전부 읽는다. 예전 채널 기록도 포함한다.
+    ctx = recent(toks["ainz"], 30)
+    if trigger_id:
+        cut = next((i for i, m in enumerate(ctx) if m["id"] == trigger_id), None)
+        if cut is not None:
+            ctx = ctx[:cut + 1]
     lines = [
-        f"{m['author'].get('username','?')}: {(m.get('content') or '').strip()[:250]}"
-        for m in ctx[-3:] if (m.get("content") or "").strip()]
+        f"{m['author'].get('username','?')}: {(m.get('content') or '').strip()}"
+        for m in ctx if (m.get("content") or "").strip()]
     if not lines or trigger.strip() not in lines[-1]:
-        lines.append(f"유튜브_빛나대디: {trigger.strip()[:400]}")
+        lines.append(f"유튜브_빛나대디: {trigger.strip()}")
     transcript = "\n".join(lines)
     log = open(LOG, "a", encoding="utf-8")
     log.write(f"{time.strftime('%H:%M:%S')} trigger={trigger[:40]!r} selected={selected}\n")
@@ -107,7 +112,7 @@ def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
             text = reply(agent, current)
             stop.set()
             api(toks[agent], f"/channels/{CHANNEL}/messages", "POST", {"content": text})
-            current += f"\n{DISPLAY[agent]}: {text[:400]}"
+            current += f"\n{DISPLAY[agent]}: {text}"
             log.write(f"  {agent}: {text[:60]}\n")
             log.flush()
             print(f"{DISPLAY[agent]}: {text[:50]}", flush=True)
