@@ -17,7 +17,8 @@
   "agents": {
     "defaults": {
       "models": {
-        "opencode-go/deepseek-v4.1-flash": {}
+        "opencode-go/deepseek-v4.1-flash": {},
+        "opencode-go/deepseek-v4-flash": {}
       },
       "heartbeat": {
         "agentId": "main",
@@ -33,7 +34,7 @@
       "model": {
         "primary": "opencode-go/deepseek-v4.1-flash",
         "fallbacks": [
-          "opencode-go/deepseek-v4.1-flash"
+          "opencode-go/deepseek-v4-flash"
         ]
       }
     },
@@ -43,7 +44,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "workspace": "/Users/gim-yeonsu/.openclaw/workspace",
@@ -56,7 +57,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -72,7 +73,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -88,7 +89,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -104,7 +105,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -120,7 +121,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -136,7 +137,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -152,7 +153,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -168,7 +169,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -184,7 +185,7 @@
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
           "fallbacks": [
-            "opencode-go/deepseek-v4.1-flash"
+            "opencode-go/deepseek-v4-flash"
           ]
         },
         "thinkingDefault": "medium",
@@ -394,12 +395,104 @@
       "dmPolicy": "allowlist",
       "groupPolicy": "allowlist",
       "accounts": {
-        "openclaw": {
+        "ainz": {
           "enabled": true,
-          "name": "OpenClaw",
-          "token": "MTU2NjMyMTI4MDU5MDk0MjM0OA.GblQat.7Y0UiBvZFt7l1esSVD9XJwThAOnxu4yuRrTdEg",
+          "name": "아인즈",
+          "token": "MTU2NjM0MTQ4NzUwNjA5NjE3MA.Gg2Plf.xtHBfcEWkRVxZWhWAGazf8FFeW4XO3PHgjLpOQ",
           "dmPolicy": "allowlist",
-          "groupPolicy": "open"
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "albedo": {
+          "enabled": true,
+          "name": "알베도",
+          "token": "MTU2NjM0NTAwMTg3MTQ3ODkyNg.GjUOLZ.NCoBZgNhAo7KYJdY6uTUSA9i1tPHLwl_JPvhpc",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "shalltear": {
+          "enabled": true,
+          "name": "샤르티아",
+          "token": "MTU2NjM0NzY4ODQyMzk4MTA1Ng.GpqlWN.Z2zI_jyL3Etn21leT0nN0_KqRJu_AIfcW_kFaw",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "mare": {
+          "enabled": true,
+          "name": "마레",
+          "token": "MTU2NjM0Nzk1OTcxNTc2MjE5Ng.GLMf2h.rry_r04ZgF-Xv5N2pOQlaa2BoelsGJ4H69vMDg",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "aura": {
+          "enabled": true,
+          "name": "아우라",
+          "token": "MTU2NjM0ODkyMDQyMDk1ODI3OA.GEfHp4.CDbm1Uvsvq7gK5kL0MVGwp_Hrybup5ndrS_n08",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "demiurge": {
+          "enabled": true,
+          "name": "데미우르고스",
+          "token": "MTU2NjM0OTI3MjkxODY2MzI4Mw.GkzcQb.GQ_tS4bljoetGO_eOA0jdOW1Gifn2TVRUAnhH4",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "sebas": {
+          "enabled": true,
+          "name": "세바스",
+          "token": "MTU2NjM1MTg5Mzc4NDAzNTMzOA.GK_cV7.Zv6XVU5o62Cf1-xm6oD6soOK-UX8DCCYs1hyOU",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "pandora-actor": {
+          "enabled": true,
+          "name": "판도라",
+          "token": "MTU2NjM1Mjc0OTIzNzUwNjE3MA.GSyZsd.7TvmwMZOt2N_c_yDvXKQ44dsNjOZTKehvfc9XM",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
+        },
+        "cocytus": {
+          "enabled": true,
+          "name": "코퀴토스",
+          "token": "MTU2NjM1MzA5NTk1OTY0NjIyOA.GdoneZ.abvjd8iW8YSUP7NkLrnfbrRNuR7MKPNJj7XJyg",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "335243494421692418"
+          ],
+          "groupPolicy": "open",
+          "joinIntro": true
         }
       },
       "guilds": {
@@ -409,7 +502,9 @@
             "335243494421692418"
           ]
         }
-      }
+      },
+      "joinIntro": true,
+      "allowBots": false
     }
   },
   "talk": {
@@ -489,35 +584,81 @@
       }
     },
     {
+      "type": "route",
       "agentId": "ainz",
       "match": {
         "channel": "discord",
-        "accountId": "openclaw"
+        "accountId": "ainz"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "albedo",
+      "match": {
+        "channel": "discord",
+        "accountId": "albedo"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "aura",
+      "match": {
+        "channel": "discord",
+        "accountId": "aura"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "cocytus",
+      "match": {
+        "channel": "discord",
+        "accountId": "cocytus"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "demiurge",
+      "match": {
+        "channel": "discord",
+        "accountId": "demiurge"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "mare",
+      "match": {
+        "channel": "discord",
+        "accountId": "mare"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "pandora-actor",
+      "match": {
+        "channel": "discord",
+        "accountId": "pandora-actor"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "sebas",
+      "match": {
+        "channel": "discord",
+        "accountId": "sebas"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "shalltear",
+      "match": {
+        "channel": "discord",
+        "accountId": "shalltear"
       }
     }
   ],
   "env": {
     "vars": {
       "OPENCODE_API_KEY": "oc_sk_5fb5c738dbc3_n8fu0LKKvCgeIiYh_WqC3ma0EHsyTRbN"
-    }
-  },
-  "broadcast": {
-    "strategy": "parallel",
-    "discord:1566319590722506886": {
-      "agents": [
-        "ainz",
-        "albedo",
-        "aura",
-        "cocytus",
-        "demiurge",
-        "mare",
-        "pandora-actor",
-        "sebas",
-        "shalltear"
-      ],
-      "mentionGating": false,
-      "maxRounds": 2,
-      "maxTurns": 18
     }
   },
   "memory": {
