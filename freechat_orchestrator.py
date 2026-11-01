@@ -29,6 +29,15 @@ NAMES = {
     "sebas": "세바스", "shalltear": "샤르티아",
 }
 LOG = HOME / ".openclaw/freechat.log"
+TOPICS = [
+    "오늘 주인님에게 칭찬받고 싶은 일",
+    "나자릭에서 가장 웃겼던 실수",
+    "동료 중 한 명을 한 문장으로 소개하기",
+    "주인님이 갑자기 휴가를 주면 뭐 하고 싶은지",
+    "서로의 말투를 흉내 내 보기",
+    "오늘 하루 중 제일 귀찮았던 일",
+    "나자릭 식당 메뉴를 새로 만든다면",
+]
 
 
 def tokens() -> dict[str, str]:
@@ -60,11 +69,13 @@ def reply(agent: str, context: list[dict]) -> str:
         if text:
             lines.append(f"{who}: {text[:300]}")
     transcript = "\n".join(lines) or "(대화 시작)"
+    topic = TOPICS[int(time.time() // 300) % len(TOPICS)]
     prompt = (
-        f"너는 나자릭의 {NAMES[agent]}이다. 다음은 '나자릭 자유대화' 채널의 최근 대화다.\n\n"
-        f"{transcript}\n\n"
-        "이어서 네 캐릭터로 2문장 이내로 짧게 말하라. 같은 말을 반복하지 말고 새로운 내용을 보태라. "
-        "다른 캐릭터에게 말을 거는 형태로 자연스럽게 이어가라. 설명이나 머리말 없이 발언만 출력하라."
+        f"너는 나자릭의 {NAMES[agent]}이다. 지금은 '나자릭 자유대화' 시간이다.\n\n"
+        f"최근 대화:\n{transcript}\n\n"
+        f"오늘의 화제: {topic}\n"
+        "술술 수다 떨듯이 1~2문장으로 이어가라. 상대 이름을 부르고, 질문이나 농담을 섞어라. "
+        "보고서 말투는 금지. 설명이나 머리말 없이 네 발언만 출력하라."
     )
     out = subprocess.run(
         ["openclaw", "agent", "--agent", agent, "--message", prompt],
