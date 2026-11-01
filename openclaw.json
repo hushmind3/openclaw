@@ -64,7 +64,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@ainz\\b"
+            "아인즈"
           ]
         }
       },
@@ -80,7 +80,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@albedo\\b"
+            "알베도"
           ]
         }
       },
@@ -96,7 +96,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@aura\\b"
+            "아우라"
           ]
         }
       },
@@ -112,7 +112,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@cocytus\\b"
+            "코퀴토스"
           ]
         }
       },
@@ -128,7 +128,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@demiurge\\b"
+            "데미우르고스"
           ]
         }
       },
@@ -144,7 +144,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@mare\\b"
+            "마레"
           ]
         }
       },
@@ -160,7 +160,8 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@pandora-actor\\b"
+            "판도라",
+            "판도라엑터"
           ]
         }
       },
@@ -176,7 +177,7 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@sebas\\b"
+            "세바스"
           ]
         }
       },
@@ -192,7 +193,8 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "@shalltear\\b"
+            "샤르티아",
+            "샬티어"
           ]
         }
       }
