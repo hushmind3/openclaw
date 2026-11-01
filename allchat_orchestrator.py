@@ -10,6 +10,7 @@ import json
 import re
 import subprocess
 import sys
+import threading
 import time
 import urllib.request
 from pathlib import Path
@@ -85,18 +86,33 @@ def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
     transcript = f"유튜브_빛나대디: {trigger.strip()[:500]}"
     log = open(LOG, "a", encoding="utf-8")
     log.write(f"{time.strftime('%H:%M:%S')} trigger={trigger[:40]!r} selected={selected}\n")
-    for agent in selected:
-        try:
-            text = reply(agent, transcript)
-            api(toks[agent], f"/channels/{CHANNEL}/messages", "POST", {"content": text})
-            log.write(f"  {agent}: {text[:60]}\n")
-            log.flush()
-            print(f"{DISPLAY[agent]}: {text[:50]}", flush=True)
-        except Exception as exc:  # noqa: BLE001 - one turn may fail
-            log.write(f"  {agent} ERROR: {exc}\n")
-            log.flush()
-            print(f"{DISPLAY[agent]} ERROR: {exc}", flush=True)
-        time.sleep(1.5)
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    stops = {}
+    def keep_typing(agent, stop):
+        while not stop.is_set():
+            try:
+                api(toks[agent], f"/channels/{CHANNEL}/typing", "POST")
+            except Exception:  # noqa: BLE001
+                pass
+            stop.wait(8)
+    with ThreadPoolExecutor(max_workers=max(1, len(selected))) as pool:
+        futures = {pool.submit(reply, agent, transcript): agent for agent in selected}
+        for agent in selected:
+            stop = threading.Event(); stops[agent] = stop
+            threading.Thread(target=keep_typing, args=(agent, stop), daemon=True).start()
+        for fut in as_completed(futures):
+            agent = futures[fut]
+            try:
+                text = fut.result()
+                stops[agent].set()
+                api(toks[agent], f"/channels/{CHANNEL}/messages", "POST", {"content": text})
+                log.write(f"  {agent}: {text[:60]}\n")
+                log.flush()
+                print(f"{DISPLAY[agent]}: {text[:50]}", flush=True)
+            except Exception as exc:  # noqa: BLE001 - one turn may fail
+                log.write(f"  {agent} ERROR: {exc}\n")
+                log.flush()
+                print(f"{DISPLAY[agent]} ERROR: {exc}", flush=True)
     log.close()
 
 

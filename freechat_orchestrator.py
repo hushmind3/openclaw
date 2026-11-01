@@ -12,6 +12,7 @@ OpenClaw CLI로 생성해 해당 봇 계정으로 직접 게시한다.
 import json
 import subprocess
 import sys
+import threading
 import time
 import urllib.request
 from pathlib import Path
@@ -77,8 +78,18 @@ def run(turns: int) -> None:
     for i in range(turns):
         agent = AGENTS[i % len(AGENTS)]
         try:
+            stop = threading.Event()
+            def keep_typing(tok=toks[agent], ev=stop):
+                while not ev.is_set():
+                    try:
+                        api(tok, f"/channels/{CHANNEL}/typing", "POST")
+                    except Exception:  # noqa: BLE001
+                        pass
+                    ev.wait(8)
+            threading.Thread(target=keep_typing, daemon=True).start()
             ctx = recent(toks["ainz"])
             text = reply(agent, ctx)
+            stop.set()
             api(toks[agent], f"/channels/{CHANNEL}/messages", "POST",
                 {"content": text})
             log.write(f"{time.strftime('%H:%M:%S')} {agent}: {text[:80]}\n")
