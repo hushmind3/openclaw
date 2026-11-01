@@ -110,7 +110,6 @@
         "groupChat": {
           "mentionPatterns": [
             "아우라",
-            "다들",
             "전원",
             "모두"
           ]
@@ -129,7 +128,6 @@
         "groupChat": {
           "mentionPatterns": [
             "코퀴토스",
-            "다들",
             "전원",
             "모두"
           ]
@@ -148,7 +146,6 @@
         "groupChat": {
           "mentionPatterns": [
             "데미우르고스",
-            "다들",
             "전원",
             "모두"
           ]
@@ -167,7 +164,6 @@
         "groupChat": {
           "mentionPatterns": [
             "마레",
-            "다들",
             "전원",
             "모두"
           ]
@@ -187,7 +183,6 @@
           "mentionPatterns": [
             "판도라",
             "판도라엑터",
-            "다들",
             "전원",
             "모두"
           ]
@@ -206,7 +201,6 @@
         "groupChat": {
           "mentionPatterns": [
             "세바스",
-            "다들",
             "전원",
             "모두"
           ]
@@ -226,7 +220,6 @@
           "mentionPatterns": [
             "샤르티아",
             "샬티어",
-            "다들",
             "전원",
             "모두"
           ]
