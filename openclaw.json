@@ -50,7 +50,14 @@
         },
         "workspace": "/Users/gim-yeonsu/.openclaw/workspace",
         "thinkingDefault": "off",
-        "name": "🧭 메인"
+        "name": "🧭 메인",
+        "groupChat": {
+          "mentionPatterns": [
+            "다들",
+            "전원",
+            "모두"
+          ]
+        }
       },
       "ainz": {
         "name": "💀 아인즈",
@@ -64,7 +71,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "아인즈"
+            "아인즈",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -80,7 +90,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "알베도"
+            "알베도",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -96,7 +109,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "아우라"
+            "아우라",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -112,7 +128,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "코퀴토스"
+            "코퀴토스",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -128,7 +147,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "데미우르고스"
+            "데미우르고스",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -144,7 +166,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "마레"
+            "마레",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -161,7 +186,10 @@
         "groupChat": {
           "mentionPatterns": [
             "판도라",
-            "판도라엑터"
+            "판도라엑터",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -177,7 +205,10 @@
         "thinkingDefault": "off",
         "groupChat": {
           "mentionPatterns": [
-            "세바스"
+            "세바스",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       },
@@ -194,7 +225,10 @@
         "groupChat": {
           "mentionPatterns": [
             "샤르티아",
-            "샬티어"
+            "샬티어",
+            "다들",
+            "전원",
+            "모두"
           ]
         }
       }
