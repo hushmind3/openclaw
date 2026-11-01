@@ -1,0 +1,12 @@
+[2026-10-27T22:53:32Z] openclaw restart attempt source=handoff mode=start-after-exit target=gui/501/ai.openclaw.gateway pid=6992 interactive=0
+[2026-10-27T22:53:34Z] openclaw restart done source=handoff mode=start-after-exit interactive=0
+[2026-11-01T04:49:40Z] openclaw restart attempt source=handoff mode=start-after-exit target=gui/501/ai.openclaw.gateway pid=1217 interactive=0
+[2026-11-01T04:49:42Z] openclaw restart done source=handoff mode=start-after-exit interactive=0
+[2026-11-01T04:50:29.870Z] openclaw gateway lifecycle source=cli action=restart mode=enable interactive=0
+[2026-11-01T04:50:30.147Z] openclaw gateway lifecycle source=cli action=restart mode=kickstart interactive=0
+[2026-11-01T05:36:59.204Z] openclaw gateway lifecycle source=cli action=restart mode=enable interactive=0
+[2026-11-01T05:37:01.431Z] openclaw gateway lifecycle source=cli action=restart mode=kickstart interactive=0
+[2026-11-01T05:44:53.539Z] openclaw gateway lifecycle source=cli action=restart mode=enable interactive=0
+[2026-11-01T05:44:54.728Z] openclaw gateway lifecycle source=cli action=restart mode=kickstart interactive=0
+[2026-11-01T05:49:45.567Z] openclaw gateway lifecycle source=cli action=restart mode=enable interactive=0
+[2026-11-01T05:49:46.776Z] openclaw gateway lifecycle source=cli action=restart mode=kickstart interactive=0

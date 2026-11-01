@@ -1,0 +1,22 @@
+{
+  "entries" : {
+    "\/Users\/gim-yeonsu\/.openclaw\/openclaw.json" : {
+      "lastKnownGood" : {
+        "bytes" : 146,
+        "ctimeMs" : 1781187952129.1543,
+        "dev" : "16777233",
+        "gatewayMode" : "local",
+        "gid" : 20,
+        "hash" : "111f2729d111b6722da8697af2ba0d830661ca11fd81071a77c4a2d458956d72",
+        "hasMeta" : true,
+        "ino" : "23370707",
+        "mode" : 420,
+        "mtimeMs" : 1781187952129.3591,
+        "nlink" : 1,
+        "observedAt" : "2026-07-01T04:50:36Z",
+        "uid" : 501
+      },
+      "lastObservedSuspiciousSignature" : null
+    }
+  }
+}
