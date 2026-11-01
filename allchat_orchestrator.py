@@ -13,6 +13,7 @@ import sys
 import threading
 import time
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 HOME = Path.home()
@@ -34,6 +35,45 @@ DISPLAY = {
     "sebas": "세바스", "shalltear": "샤르티아",
 }
 LOG = HOME / ".openclaw/allchat.log"
+GEN_FILE = HOME / ".openclaw/allchat.session.json"
+
+
+def _state() -> dict:
+    try:
+        return json.loads(GEN_FILE.read_text())
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def generation() -> int:
+    return int(_state().get("generation", 0))
+
+
+def reset_since() -> str | None:
+    return _state().get("since")
+
+
+def bump_generation() -> int:
+    n = generation() + 1
+    GEN_FILE.write_text(json.dumps({
+        "generation": n,
+        "since": datetime.now(timezone.utc).isoformat(),
+    }))
+    return n
+
+
+def mark_since() -> None:
+    state = _state()
+    state["since"] = datetime.now(timezone.utc).isoformat()
+    GEN_FILE.write_text(json.dumps(state))
+
+
+def session_key() -> str:
+    return f"discord:channel:{CHANNEL}:g{generation()}"
+
+
+def is_reset(text: str) -> bool:
+    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", text))
 
 
 def tokens() -> dict[str, str]:
@@ -72,7 +112,7 @@ def select(text: str, ids: dict[str, str]) -> list[str]:
 def reply(agent: str, transcript: str) -> str:
     out = subprocess.run(
         ["/Users/gim-yeonsu/.openclaw/bin/openclaw", "agent", "--agent", agent,
-         "--session-key", f"discord:channel:{CHANNEL}", "--message", transcript or "…"],
+         "--session-key", session_key(), "--message", transcript or "…"],
         capture_output=True, text=True, timeout=120,
     )
     text = (out.stdout or "").strip()
@@ -83,9 +123,19 @@ def reply(agent: str, transcript: str) -> str:
 
 def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
         trigger_id: str | None = None) -> None:
+    if is_reset(trigger):
+        n = bump_generation()
+        api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
+            {"content": f"새 주제로 시작합니다. (세션 {n})"})
+        mark_since()
+        print(f"reset -> generation {n}", flush=True)
+        return
     selected = select(trigger, ids)
-    # 그 시점까지의 대화를 전부 읽는다. 예전 채널 기록도 포함한다.
-    ctx = recent(toks["ainz"], 30)
+    # 리셋 이후 대화만 읽는다. 세대가 바뀌면 예전 채널 기록은 제외된다.
+    since = reset_since()
+    ctx = recent(toks["ainz"], 100)
+    if since:
+        ctx = [m for m in ctx if m["timestamp"] > since]
     if trigger_id:
         cut = next((i for i, m in enumerate(ctx) if m["id"] == trigger_id), None)
         if cut is not None:

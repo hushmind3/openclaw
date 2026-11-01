@@ -10,11 +10,13 @@ OpenClaw CLI로 생성해 해당 봇 계정으로 직접 게시한다.
   python3 freechat_orchestrator.py --watch    # 채널의 사용자 메시지를 감시해 자동 시작
 """
 import json
+import re
 import subprocess
 import sys
 import threading
 import time
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 HOME = Path.home()
@@ -30,6 +32,45 @@ NAMES = {
     "sebas": "세바스", "shalltear": "샤르티아",
 }
 LOG = HOME / ".openclaw/freechat.log"
+GEN_FILE = HOME / ".openclaw/freechat.session.json"
+
+
+def _state() -> dict:
+    try:
+        return json.loads(GEN_FILE.read_text())
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def generation() -> int:
+    return int(_state().get("generation", 0))
+
+
+def reset_since() -> str | None:
+    return _state().get("since")
+
+
+def bump_generation() -> int:
+    n = generation() + 1
+    GEN_FILE.write_text(json.dumps({
+        "generation": n,
+        "since": datetime.now(timezone.utc).isoformat(),
+    }))
+    return n
+
+
+def mark_since() -> None:
+    state = _state()
+    state["since"] = datetime.now(timezone.utc).isoformat()
+    GEN_FILE.write_text(json.dumps(state))
+
+
+def session_key() -> str:
+    return f"discord:channel:{CHANNEL}:g{generation()}"
+
+
+def is_reset(text: str) -> bool:
+    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", text))
 
 
 def tokens() -> dict[str, str]:
@@ -64,7 +105,7 @@ def reply(agent: str, context: list[dict]) -> str:
     prompt = transcript or "…"
     out = subprocess.run(
         ["/Users/gim-yeonsu/.openclaw/bin/openclaw", "agent", "--agent", agent,
-         "--session-key", f"discord:channel:{CHANNEL}", "--message", prompt],
+         "--session-key", session_key(), "--message", prompt],
         capture_output=True, text=True, timeout=120,
     )
     text = (out.stdout or "").strip()
@@ -75,6 +116,7 @@ def reply(agent: str, context: list[dict]) -> str:
 
 def run(turns: int) -> None:
     toks = tokens()
+    since = reset_since()
     log = open(LOG, "a", encoding="utf-8")
     for i in range(turns):
         agent = AGENTS[i % len(AGENTS)]
@@ -88,7 +130,9 @@ def run(turns: int) -> None:
                         pass
                     ev.wait(8)
             threading.Thread(target=keep_typing, daemon=True).start()
-            ctx = recent(toks["ainz"])
+            ctx = recent(toks["ainz"], 20)
+            if since:
+                ctx = [m for m in ctx if m["timestamp"] > since]
             text = reply(agent, ctx)
             stop.set()
             api(toks[agent], f"/channels/{CHANNEL}/messages", "POST",
@@ -113,8 +157,18 @@ def watch() -> None:
             msgs = recent(toks["ainz"], 20)
             fresh = [m for m in msgs if m["id"] not in seen]
             seen.update(m["id"] for m in msgs)
-            if any(not m["author"].get("bot") and (m.get("content") or "").strip() for m in fresh):
-                run(9)
+            users = [m for m in fresh
+                     if not m["author"].get("bot") and (m.get("content") or "").strip()]
+            if users:
+                last = users[-1]
+                if is_reset(last["content"]):
+                    n = bump_generation()
+                    api(toks["ainz"], f"/channels/{CHANNEL}/messages", "POST",
+                        {"content": f"새 주제로 시작합니다. (세션 {n})"})
+                    mark_since()
+                    print(f"reset -> generation {n}", flush=True)
+                else:
+                    run(9)
         except Exception as exc:  # noqa: BLE001 - keep watching
             print("watch error:", exc, flush=True)
         time.sleep(3)
