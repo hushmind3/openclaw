@@ -79,12 +79,10 @@ def reply(agent: str, transcript: str) -> str:
     return text[:1800]
 
 
-def run(trigger: str, toks: dict[str, str], ids: dict[str, str]) -> None:
+def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
+        trigger_id: str | None = None) -> None:
     selected = select(trigger, ids)
-    ctx = recent(toks["ainz"])
-    transcript = "\n".join(
-        f"{m['author'].get('username','?')}: {(m.get('content') or '').strip()[:300]}"
-        for m in ctx[-6:] if (m.get("content") or "").strip())
+    transcript = f"유튜브_빛나대디: {trigger.strip()[:500]}"
     log = open(LOG, "a", encoding="utf-8")
     log.write(f"{time.strftime('%H:%M:%S')} trigger={trigger[:40]!r} selected={selected}\n")
     for agent in selected:
@@ -119,7 +117,8 @@ def watch() -> None:
             seen.update(m["id"] for m in msgs)
             users = [m for m in fresh if not m["author"].get("bot") and (m.get("content") or "").strip()]
             if users:
-                run(users[-1]["content"], toks, ids)
+                last = users[-1]
+                run(last["content"], toks, ids, trigger_id=last["id"])
         except Exception as exc:  # noqa: BLE001 - keep watching
             print("watch error:", exc, flush=True)
         time.sleep(3)
