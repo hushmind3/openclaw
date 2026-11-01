@@ -46,7 +46,8 @@ def recent(token: str, limit: int = 20) -> list[dict]:
 
 
 def is_reset(text: str) -> bool:
-    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", text))
+    clean = re.sub(r"<@[!&]?\d+>", "", text)
+    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", clean))
 
 
 def reset_sessions() -> tuple[int, int]:

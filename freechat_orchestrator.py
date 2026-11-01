@@ -70,7 +70,8 @@ def session_key() -> str:
 
 
 def is_reset(text: str) -> bool:
-    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", text))
+    clean = re.sub(r"<@[!&]?\d+>", "", text)
+    return bool(re.match(r"^\s*(새(\s*주제)?|리셋)[\s.!?]*$", clean))
 
 
 def tokens() -> dict[str, str]:
