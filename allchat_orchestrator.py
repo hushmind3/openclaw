@@ -70,7 +70,7 @@ def select(text: str, ids: dict[str, str]) -> list[str]:
 
 def reply(agent: str, transcript: str) -> str:
     out = subprocess.run(
-        ["openclaw", "agent", "--agent", agent, "--message", transcript or "…"],
+        ["/Users/gim-yeonsu/.openclaw/bin/openclaw", "agent", "--agent", agent, "--message", transcript or "…"],
         capture_output=True, text=True, timeout=120,
     )
     text = (out.stdout or "").strip()

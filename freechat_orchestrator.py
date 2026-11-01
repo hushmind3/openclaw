@@ -62,7 +62,7 @@ def reply(agent: str, context: list[dict]) -> str:
     transcript = "\n".join(lines) or "(대화 시작)"
     prompt = transcript or "…"
     out = subprocess.run(
-        ["openclaw", "agent", "--agent", agent, "--message", prompt],
+        ["/Users/gim-yeonsu/.openclaw/bin/openclaw", "agent", "--agent", agent, "--message", prompt],
         capture_output=True, text=True, timeout=120,
     )
     text = (out.stdout or "").strip()
