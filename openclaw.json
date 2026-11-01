@@ -17,9 +17,7 @@
   "agents": {
     "defaults": {
       "models": {
-        "opencode-go/deepseek-v4.1-flash": {},
-        "opencode-go/deepseek-v4-flash": {},
-        "opencode-go/deepseek-v4-pro": {}
+        "opencode-go/deepseek-v4.1-flash": {}
       },
       "heartbeat": {
         "agentId": "main",
@@ -34,7 +32,9 @@
       },
       "model": {
         "primary": "opencode-go/deepseek-v4.1-flash",
-        "fallbacks": []
+        "fallbacks": [
+          "opencode-go/deepseek-v4.1-flash"
+        ]
       }
     },
     "ownership": "explicit",
@@ -42,7 +42,9 @@
       "main": {
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "workspace": "/Users/gim-yeonsu/.openclaw/workspace",
         "thinkingDefault": "medium",
@@ -53,7 +55,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/ainz",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -67,7 +71,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/albedo",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -81,7 +87,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/aura",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -95,7 +103,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/cocytus",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -109,7 +119,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/demiurge",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -123,7 +135,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/mare",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -137,7 +151,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/pandora-actor",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -151,7 +167,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/sebas",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
@@ -165,7 +183,9 @@
         "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/shalltear",
         "model": {
           "primary": "opencode-go/deepseek-v4.1-flash",
-          "fallbacks": []
+          "fallbacks": [
+            "opencode-go/deepseek-v4.1-flash"
+          ]
         },
         "thinkingDefault": "medium",
         "groupChat": {
