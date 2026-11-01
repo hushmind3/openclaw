@@ -83,7 +83,13 @@ def reply(agent: str, transcript: str) -> str:
 def run(trigger: str, toks: dict[str, str], ids: dict[str, str],
         trigger_id: str | None = None) -> None:
     selected = select(trigger, ids)
-    transcript = f"유튜브_빛나대디: {trigger.strip()[:500]}"
+    ctx = recent(toks["ainz"], 6)
+    lines = [
+        f"{m['author'].get('username','?')}: {(m.get('content') or '').strip()[:250]}"
+        for m in ctx[-3:] if (m.get("content") or "").strip()]
+    if not lines or trigger.strip() not in lines[-1]:
+        lines.append(f"유튜브_빛나대디: {trigger.strip()[:400]}")
+    transcript = "\n".join(lines)
     log = open(LOG, "a", encoding="utf-8")
     log.write(f"{time.strftime('%H:%M:%S')} trigger={trigger[:40]!r} selected={selected}\n")
     from concurrent.futures import ThreadPoolExecutor, as_completed
