@@ -1,0 +1,18 @@
+{
+  "pid": 28901,
+  "ownerId": "efdce964-ed73-4071-9d03-daa66794772c",
+  "createdAt": "2026-11-01T05:49:49.714Z",
+  "startupPhase": "starting",
+  "configPath": "/Users/gim-yeonsu/.openclaw/openclaw.json",
+  "stateDir": "/Users/gim-yeonsu/.openclaw",
+  "role": "gateway",
+  "processNamespace": {
+    "platform": "darwin",
+    "identity": "bdf19b5a-10aa-4992-8671-a11f3223d3e3",
+    "host": "gim-yeonsuui-MacBookPro.local"
+  },
+  "cronOwnerProjection": "dynamic-default-v1",
+  "port": 18789,
+  "startTime": 1793512186
+}
+									 	  		 	  					 	 		 	 	 	 					 	   		   		 					  		 	 		 		 					  					 	   		     	 			 	 			 			  			 			 	 	 	      	 		

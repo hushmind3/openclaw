@@ -1,0 +1,10 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{Pu as t,zu as n}from"./control-ui-core-BPT563ol.js";import{G as r,J as i,W as a}from"./lit-runtime-QehuX6Ya.js";function o(e){return[...e.missing.bins.map(e=>`bin:${e}`),...e.missing.anyBins.length>0?[`bin:any of (${e.missing.anyBins.join(`, `)})`]:[],...e.missing.env.map(e=>`env:${e}`),...e.missing.config.map(e=>`config:${e}`),...e.missing.os.map(e=>`os:${e}`)]}function s(e){return[[e.disabled,`skillStatus.disabled`],[e.blockedByAllowlist,`skillStatus.blockedAllowlist`],[e.blockedByAgentFilter,`skillStatus.blockedAgentFilter`]].flatMap(([e,t])=>e?[n(t)]:[])}function c(e){return e.eligible&&!e.blockedByAgentFilter}function l(e){return e.source===`openclaw-workshop`}function u(e){let t=e.skill,a=c(t),o=!!e.showBundledBadge;return i`
+    <div class="chip-row" style="margin-top: 6px;">
+      <span class="chip">${t.source}</span>
+      ${o?i` <span class="chip">${n(`skillStatus.bundled`)}</span> `:r}
+      <span class="chip ${a?`chip-ok`:`chip-warn`}">
+        ${n(a?`skillStatus.eligible`:`skillStatus.blocked`)}
+      </span>
+      ${t.disabled?i` <span class="chip chip-warn">${n(`skillStatus.disabled`)}</span> `:r}
+    </div>
+  `}function d(){return(d=e((()=>{a(),t()})))()}function f(e){let t=p.map(({id:e,labelKey:t,sources:r})=>({sources:r,group:{id:e,label:n(t),skills:[]}})),r=t.find(({group:e})=>e.id===`built-in`),i={id:`other`,label:n(`skillGroups.other`),skills:[]};for(let n of e)((n.bundled?r:t.find(({sources:e})=>e.includes(n.source)))?.group??i).skills.push(n);return[...t.map(({group:e})=>e),i].filter(e=>e.skills.length>0)}var p;function m(){return(m=e((()=>{t(),p=[{id:`workspace`,labelKey:`skillGroups.workspace`,sources:[`openclaw-workspace`]},{id:`learned`,labelKey:`skillGroups.learned`,sources:[`openclaw-workshop`]},{id:`built-in`,labelKey:`skillGroups.builtIn`,sources:[`openclaw-bundled`]},{id:`installed`,labelKey:`skillGroups.installed`,sources:[`openclaw-managed`]},{id:`extra`,labelKey:`skillGroups.extra`,sources:[`openclaw-extra`]}]})))()}export{d as a,u as c,s as i,m as n,c as o,o as r,l as s,f as t};

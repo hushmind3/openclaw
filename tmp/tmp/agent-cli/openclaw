@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+
+exec /Users/gim-yeonsu/.openclaw/tools/node-v24.22.1/bin/node --max-old-space-size=8192 /Users/gim-yeonsu/.openclaw/tools/node-v24.22.1/lib/node_modules/openclaw/dist/index.js "$@"

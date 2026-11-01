@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{$n as t,er as n}from"./control-ui-core-0Azpklii.js";function r(e){return e instanceof n&&e.gatewayCode===`INVALID_REQUEST`&&e.message.includes(`unknown method: system.info`)}function i(){return(i=e((()=>{t()})))()}export{r as n,i as t};

@@ -1,0 +1,381 @@
+{
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "6860238c196494e55aa58ed30bfa94b0a8748cc5e639eed1"
+    }
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.10.8",
+    "migrations": {
+      "modelPolicyAllowlist": true,
+      "utilityModelSeparation": true,
+      "webhookListeners": true
+    }
+  },
+  "agents": {
+    "defaults": {
+      "models": {
+        "openai/gpt-6-astra": {}
+      },
+      "heartbeat": {
+        "agentId": "main",
+        "isolatedSession": true,
+        "lightContext": true
+      },
+      "systemAgent": {
+        "agentId": "main"
+      },
+      "subagents": {
+        "delegationMode": "suggest"
+      }
+    },
+    "ownership": "explicit",
+    "entries": {
+      "main": {
+        "models": {
+          "openai/gpt-6-astra": {
+            "agentRuntime": {
+              "id": "openclaw"
+            }
+          }
+        },
+        "model": "openai/gpt-6-luna",
+        "workspace": "/Users/gim-yeonsu/.openclaw/workspace",
+        "thinkingDefault": "medium"
+      },
+      "ainz": {
+        "name": "ainz",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/ainz",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "albedo": {
+        "name": "albedo",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/albedo",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "aura": {
+        "name": "aura",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/aura",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "cocytus": {
+        "name": "cocytus",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/cocytus",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "demiurge": {
+        "name": "demiurge",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/demiurge",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "mare": {
+        "name": "mare",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/mare",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "pandora-actor": {
+        "name": "pandora-actor",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/pandora-actor",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "sebas": {
+        "name": "sebas",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/sebas",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      },
+      "shalltear": {
+        "name": "shalltear",
+        "workspace": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/shalltear",
+        "model": "openai/gpt-6-luna",
+        "thinkingDefault": "medium"
+      }
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-10-27T21:39:35.066Z",
+    "lastRunVersion": "2026.10.8",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "skills": {
+    "entries": {
+      "coding-agent": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      },
+      "gog": {
+        "enabled": false
+      },
+      "goplaces": {
+        "enabled": false
+      },
+      "mcporter": {
+        "enabled": false
+      },
+      "obsidian": {
+        "enabled": false
+      },
+      "openai-whisper-api": {
+        "enabled": false
+      },
+      "oracle": {
+        "enabled": false
+      },
+      "sherpa-onnx-tts": {
+        "enabled": false
+      },
+      "spotify-player": {
+        "enabled": false
+      },
+      "summarize": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      }
+    }
+  },
+  "auth": {
+    "profiles": {
+      "openai:setup-06f5ec5a-e200-4fec-8fb1-64e33f9cbd8c": {
+        "provider": "openai",
+        "mode": "oauth",
+        "email": "hushmind@gmail.com"
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "openai": {
+        "enabled": true
+      }
+    }
+  },
+  "secrets": {
+    "providers": {
+      "hermes-migration": {
+        "source": "file",
+        "path": "/Users/gim-yeonsu/.openclaw/hermes-migration-staging/telegram-secrets.json",
+        "mode": "json"
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "allowFrom": [
+        "7094091589"
+      ],
+      "groupPolicy": "disabled",
+      "accounts": {
+        "ainz": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/ainz"
+          }
+        },
+        "albedo": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/albedo"
+          }
+        },
+        "aura": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/aura"
+          }
+        },
+        "cocytus": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/cocytus"
+          }
+        },
+        "demiurge": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/demiurge"
+          }
+        },
+        "mare": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/mare"
+          }
+        },
+        "pandora-actor": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/pandora-actor"
+          }
+        },
+        "sebas": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/sebas"
+          }
+        },
+        "shalltear": {
+          "enabled": false,
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            "7094091589"
+          ],
+          "groupPolicy": "disabled",
+          "botToken": {
+            "source": "file",
+            "provider": "hermes-migration",
+            "id": "/shalltear"
+          }
+        }
+      }
+    }
+  },
+  "talk": {
+    "agentId": "main"
+  },
+  "bindings": [
+    {
+      "type": "route",
+      "agentId": "ainz",
+      "match": {
+        "channel": "telegram",
+        "accountId": "ainz"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "albedo",
+      "match": {
+        "channel": "telegram",
+        "accountId": "albedo"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "aura",
+      "match": {
+        "channel": "telegram",
+        "accountId": "aura"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "cocytus",
+      "match": {
+        "channel": "telegram",
+        "accountId": "cocytus"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "demiurge",
+      "match": {
+        "channel": "telegram",
+        "accountId": "demiurge"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "mare",
+      "match": {
+        "channel": "telegram",
+        "accountId": "mare"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "pandora-actor",
+      "match": {
+        "channel": "telegram",
+        "accountId": "pandora-actor"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "sebas",
+      "match": {
+        "channel": "telegram",
+        "accountId": "sebas"
+      }
+    },
+    {
+      "type": "route",
+      "agentId": "shalltear",
+      "match": {
+        "channel": "telegram",
+        "accountId": "shalltear"
+      }
+    }
+  ]
+}

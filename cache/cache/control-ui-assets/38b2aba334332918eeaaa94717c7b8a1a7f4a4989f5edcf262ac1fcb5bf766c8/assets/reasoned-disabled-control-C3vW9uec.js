@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{Fi as t}from"./control-ui-core-0Azpklii.js";import{J as n,W as r}from"./lit-runtime-QehuX6Ya.js";function i(e,t){return e?n`<openclaw-tooltip open-on-click .content=${e}>${t}</openclaw-tooltip>`:t}function a(){return(a=e((()=>{r(),t()})))()}export{i as n,a as t};
